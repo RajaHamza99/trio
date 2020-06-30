@@ -7,8 +7,8 @@ services:
                           published: 3306
                           protocol: tcp
                 environment:
-                        -MYSQL_ROOT_PASSWORD: root
-                        -MYSQL_DATABASE: flask-db
+                        MYSQL_ROOT_PASSWORD: ${DB_PASSWORD}
+                        MYSQL_DATABASE: flask-db
         
                         
         flask-app:
@@ -19,6 +19,8 @@ services:
                           protocol: tcp
                 depends_on:
                         - db
+                environment:
+                        - DB_URI=${DB_URI}
                         
         nginx:
                 image: nginx:latest
